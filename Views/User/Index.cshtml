@@ -1,0 +1,56 @@
+@model IEnumerable<SalesTracker.Models.User>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow-sm">
+                <div class="card-header bg-secondary text-white">
+                    <h4 class="mb-0">Lista korisnika</h4>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped table-hover text-center align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Username</th>
+                                <th>Uloga</th>
+                                <th>Aktivan</th>
+                                <th>Akcija</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model)
+                            {
+                                <tr>
+                                    <td>@user.Username</td>
+                                    <td>@user.Role</td>
+                                    <td>
+                                        @if (user.IsActive)
+                                        {
+                                            <span class="badge bg-success">Da</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger">Ne</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (user.IsActive)
+                                        {
+                                            <a asp-action="DeactivateUser" asp-route-id="@user.Id" class="btn btn-sm btn-outline-danger">
+                                                Deaktiviraj
+                                            </a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

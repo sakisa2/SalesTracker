@@ -1,0 +1,39 @@
+@model SalesTracker.Models.Sale
+
+@{
+    ViewData["Title"] = "Izmena prodaje";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-warning text-dark text-center">
+                    <h4>Izmeni prodaju</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="EditSale" method="post">
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="mb-3">
+                            <label for="Amount" class="form-label">Iznos</label>
+                            <input type="number" class="form-control" id="Amount" name="Amount" asp-for="Amount" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Description" class="form-label">Opis</label>
+                            <input type="text" class="form-control" id="Description" name="Description" asp-for="Description" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Date" class="form-label">Datum</label>
+                            <input type="date" class="form-control" id="Date" name="Date" asp-for="Date" required />
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Sačuvaj izmene</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

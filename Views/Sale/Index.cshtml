@@ -1,0 +1,54 @@
+@model List<SalesTracker.Models.Sale>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger text-center">
+        @TempData["Error"]
+    </div>
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success text-center">
+        @TempData["Success"]
+    </div>
+}
+
+@{
+    ViewData["Title"] = "Moje prodaje";
+}
+
+<h2>Moje prodaje</h2>
+
+<style>
+    h2 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+    table th, table td {
+        text-align: center;
+        vertical-align: middle;
+    }
+</style>
+
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Datum</th>
+            <th>Iznos</th>
+            <th>Opis</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sale in Model)
+        {
+            <tr>
+                <td>@sale.Date.ToShortDateString()</td>
+                <td>@sale.Amount</td>
+                <td>@sale.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/Sale/CreateSale" class="btn btn-primary mt-3">Dodaj novu prodaju</a>
