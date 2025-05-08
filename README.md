@@ -1,16 +1,22 @@
-#Sales Tracker Application
-##Description
+# Sales Tracker Application
 
-The Sales Tracker is a .NET-based application designed to track the sales performance of agents. It supports three types of users: Administrator, Manager, and Salesperson. The application allows administrators to manage users, managers to set goals and view reports, and sales agents to input their sales data and monitor their performance.
+## Description
 
-This application utilizes object-oriented programming (OOP) principles and a layered architecture (UI / BLL / DAL). Data is stored in a database, and the application includes basic functionality for managing sales, viewing performance, and exporting reports.
+The **Sales Tracker** is a .NET-based application designed to track the sales performance of agents. It supports three types of users:
 
-##Technologies Used:
+- **Administrator**
+- **Manager**
+- **Salesperson**
 
-C#
+The application allows **Administrators** to manage users, **Managers** to set goals and view reports, and **Sales Agents** to input their sales data and monitor their performance.
 
-.NET Core
+This application follows **object-oriented programming (OOP)** principles and implements a **layered architecture** (UI / BLL / DAL). Data is stored in a **SQLite** database, and the application includes basic functionality for managing sales, viewing performance, and exporting reports.
 
-MVC
+---
 
-SQLite
+## Technologies Used
+
+- **C#**
+- **.NET Core**
+- **MVC**
+- **SQLite**
