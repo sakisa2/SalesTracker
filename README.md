@@ -10,13 +10,13 @@ The **Sales Tracker** is a .NET-based application designed to track the sales pe
 
 The application allows **Administrators** to manage users, **Managers** to set goals and view reports, and **Sales Agents** to input their sales data and monitor their performance.
 
-This application follows **object-oriented programming (OOP)** principles and implements a **layered architecture** (UI / BLL / DAL). Data is stored in a **SQLite** database, and the application includes basic functionality for managing sales, viewing performance, and exporting reports.
+This application follows **object-oriented programming (OOP)** principles and implements a **layered architecture** (UI). Data is stored in a **SQLite** database, and the application includes basic functionality for managing sales, viewing performance, and exporting reports.
 
 ---
 
 ## Technologies Used
 
 - **C#**
-- **.NET Core**
+- **ASP.NET Core**
 - **MVC**
 - **SQLite**
