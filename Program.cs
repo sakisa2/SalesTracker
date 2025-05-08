@@ -3,7 +3,7 @@ using SalesTracker.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Dodaj EF Core sa SQLite konekcijom
+// EF Core with SQLite connection
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
     

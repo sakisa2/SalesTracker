@@ -14,7 +14,7 @@ namespace SalesTracker.Controllers
             _context = context;
         }
 
-        // Akcija za dodavanje korisnika
+        // Action for adding a user
         [HttpGet]
         public IActionResult CreateUser()
         {
@@ -22,24 +22,36 @@ namespace SalesTracker.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateUser(User user)
         {
+            Console.WriteLine("=== CreateUser POST called ===");
+            Console.WriteLine($"Username: {user.Username}, Role: {user.Role}, IsActive: {user.IsActive}");
+
             if (ModelState.IsValid)
             {
+                Console.WriteLine("ModelState is valid, adding user...");
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
+                Console.WriteLine("User saved in the database.");
                 return RedirectToAction(nameof(Index));
             }
+
+            Console.WriteLine("ModelState is NOT valid:");
+            foreach (var kv in ModelState)
+                foreach (var err in kv.Value.Errors)
+                    Console.WriteLine($" - {kv.Key}: {err.ErrorMessage}");
+
             return View(user);
         }
 
-        // Akcija za listanje korisnika
+        // Action for listing users
         public async Task<IActionResult> Index()
         {
             return View(await _context.Users.ToListAsync());
         }
 
-        // Akcija za deaktivaciju korisnika
+        // Action for deactivating a user
         public async Task<IActionResult> DeactivateUser(int id)
         {
             var user = await _context.Users.FindAsync(id);
@@ -48,11 +60,10 @@ namespace SalesTracker.Controllers
                 return NotFound();
             }
 
-            user.IsActive = false;  // Pretpostavlja se da postoji polje IsActive
+            user.IsActive = false;  
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
     }
 }
-

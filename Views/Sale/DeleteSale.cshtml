@@ -1,0 +1,19 @@
+@model SalesTracker.Models.Sale
+
+@{
+    ViewData["Title"] = "Potvrda brisanja prodaje";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="alert alert-warning">
+    <p>Da li ste sigurni da želite da obrišete ovu prodaju?</p>
+    <p><strong>Prodaja:</strong> @Model.Description</p>
+    <p><strong>Datum:</strong> @Model.Date.ToString("dd/MM/yyyy")</p>
+    <p><strong>Vrednost:</strong> @Model.Amount.ToString("C")</p>
+</div>
+
+<form method="post" action="@Url.Action("Delete", "Sale", new { id = Model.Id })">
+    <button type="submit" class="btn btn-danger">Da, obriši</button>
+    <a href="@Url.Action("Index", "Sale")" class="btn btn-secondary">Odustani</a>
+</form>

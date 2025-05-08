@@ -18,7 +18,7 @@ namespace SalesTracker.Controllers
         public async Task<IActionResult> Index()
         {
             var sales = await _context.Sales.ToListAsync();
-            return View(sales);
+            return View(sales); //prikaz svih prodaja
         }
 
         // GET: /Sale/CreateSale
@@ -28,7 +28,7 @@ namespace SalesTracker.Controllers
             return View();
         }
 
-        // POST: /Sale/CreateSale
+        // POST: /Sale/CreateSale za cuvanje svih prodaja u bazu
         [HttpPost]
         public async Task<IActionResult> CreateSale(Sale sale)
         {
@@ -90,5 +90,33 @@ namespace SalesTracker.Controllers
 
             return View(updatedSale);
         }
+        // GET: /Sale/DeleteSale/5
+        public async Task<IActionResult> DeleteSale(int id)
+        {
+            var sale = await _context.Sales.FindAsync(id);
+            if (sale == null)
+            {
+                return NotFound();
+            }
+
+            return View(sale);
+        }   
+
+        // POST: /Sale/DeleteSale/5
+        [HttpPost, ActionName("DeleteSale")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var sale = await _context.Sales.FindAsync(id);
+            if (sale != null)
+            {
+                _context.Sales.Remove(sale);
+                await _context.SaveChangesAsync();
+            }
+    
+            TempData["Success"] = "Prodaja je uspešno obrisana!";
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

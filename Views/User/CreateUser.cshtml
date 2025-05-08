@@ -1,7 +1,7 @@
 @model SalesTracker.Models.User
 
 @{
-    ViewData["Title"] = "Dodaj korisnika";
+    ViewData["Title"] = "Add User";
 }
 
 <div class="container mt-5">
@@ -9,39 +9,45 @@
         <div class="col-md-6">
             <div class="card shadow">
                 <div class="card-header text-center bg-primary text-white">
-                    <h4>Dodavanje novog korisnika</h4>
+                    <h4>Add New User</h4>
                 </div>
                 <div class="card-body">
-                    <form asp-action="CreateUser" method="post">
+                    <form asp-controller="User" asp-action="CreateUser" method="post">
+                        @Html.AntiForgeryToken()
+
                         <div class="mb-3">
-                            <label for="Username" class="form-label">Korisničko ime</label>
-                            <input type="text" class="form-control" id="Username" name="Username" required />
+                            <label asp-for="Username" class="form-label">Username</label>
+                            <input asp-for="Username" class="form-control" required />
+                            <span asp-validation-for="Username" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
-                            <label for="Password" class="form-label">Lozinka</label>
-                            <input type="password" class="form-control" id="Password" name="Password" required />
+                            <label asp-for="Password" class="form-label">Password</label>
+                            <input asp-for="Password" type="password" class="form-control" required />
+                            <span asp-validation-for="Password" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3">
-                            <label for="Role" class="form-label">Rola</label>
-                            <select class="form-select" id="Role" name="Role" required>
-                                <option value="">-- Izaberi rolu --</option>
-                                <option value="Administrator">Administrator</option>
-                                <option value="Menadžer">Menadžer</option>
-                                <option value="Prodavac">Prodavac</option>
+                            <label asp-for="Role" class="form-label">Role</label>
+                            <select asp-for="Role" class="form-select" asp-items="Html.GetEnumSelectList<UserRole>()" required>
+                                <option value="">-- Select Role --</option>
                             </select>
+                            <span asp-validation-for="Role" class="text-danger"></span>
                         </div>
 
                         <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="IsActive" name="IsActive" checked />
-                            <label class="form-check-label" for="IsActive">Aktivan korisnik</label>
+                            <input asp-for="IsActive" class="form-check-input" />
+                            <label asp-for="IsActive" class="form-check-label">Active User</label>
                         </div>
 
-                        <button type="submit" class="btn btn-success w-100">Dodaj korisnika</button>
+                        <button type="submit" class="btn btn-success w-100">Add User</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
